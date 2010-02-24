@@ -1,0 +1,29 @@
+---
+abstract: 'Detect if a UNIX system is running as a virtual machine'
+author:
+  - 'Dave O''Neill <dmo@roaringpenguin.com>'
+build_requires:
+  File::Spec: 0
+  Test::Deep: 0
+  Test::Exception: 0
+  Test::More: 0.82
+distribution_type: module
+generated_by: 'Module::Install version 0.78'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Sys-Detect-Virtualization
+no_index:
+  directory:
+    - inc
+    - t
+requires:
+  Getopt::Long: 0
+  POSIX: 0
+  Parse::DMIDecode: 0.03
+  Pod::Usage: 0
+  perl: 5.8.0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.100
