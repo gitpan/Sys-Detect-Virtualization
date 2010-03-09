@@ -18,12 +18,13 @@ no_index:
   directory:
     - inc
     - t
+recommends:
+  Parse::DMIDecode: 0.03
 requires:
   Getopt::Long: 0
   POSIX: 0
-  Parse::DMIDecode: 0.03
   Pod::Usage: 0
   perl: 5.8.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.100
+version: 0.101
