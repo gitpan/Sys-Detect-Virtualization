@@ -1,5 +1,8 @@
 Revision history for Sys-Detect-Virtualization
 
+0.106   Tue, 12 Feb 2013 13:42:47 -0500 (dfs)
+	Add code to detect VirtualBox and LXC Guests.
+
 0.105	Wed, 05 May 2010 10:52:23 -0400 (dmo)
 	Avoid running t/linux_helpers.t if we can't invoke scripts from t/bin
 

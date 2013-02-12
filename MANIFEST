@@ -13,7 +13,6 @@ lib/Sys/Detect/Virtualization/freebsd.pm
 lib/Sys/Detect/Virtualization/linux.pm
 Makefile.PL
 MANIFEST
-MANIFEST.bak
 META.yml
 README
 script/virtdetect

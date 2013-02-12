@@ -64,6 +64,9 @@ sub detect_dmesg
 			qr/booting paravirtualized kernel on lguest/i => [ $self->VIRT_LGUEST ],
 			qr/booting paravirtualized kernel on vmi/i => [ $self->VIRT_VMWARE ],
 			qr/booting paravirtualized kernel on xen/i => [ $self->VIRT_XEN ],
+
+			# Virtualbox (probably)
+			qr/VBOX (?:CD-ROM|HARDDISK)/ => [ $self->VIRT_VIRTUALBOX ],
 		  ],
 	);
 
@@ -138,6 +141,11 @@ sub detect_dmidecode
 		return [ $self->VIRT_VIRTUALPC ];
 	}
 
+	# VirtualBox
+	if ($product =~ /virtualbox/i) {
+		return [ $self->VIRT_VIRTUALBOX ];
+	}
+
 	return [];
 }
 
@@ -187,6 +195,26 @@ sub detect_mtab
 			qr{^simfs }     => [ $self->VIRT_OPENVZ ],
 		]
 	);
+}
+
+=item detect_init_envvars ( )
+
+Check /proc/1/environ for LXC environment variables
+
+=cut
+
+sub detect_init_envvars
+{
+	my ($self) = @_;
+	return $self->_check_file_contents(
+		'/proc/1/environ',
+		[
+		 qr/LIBVIRT_LXC_NAME/ => [ $self->VIRT_LXC ],
+		 qr/LIBVIRT_LXC_UUID/ => [ $self->VIRT_LXC ],
+		 qr/LIBVIRT_LXC_CMDLINE/ => [ $self->VIRT_LXC ],
+		 qr/container=lxc/    => [ $self->VIRT_LXC ],
+		]
+	    );
 }
 
 =item detect_scsi_devices ( )
@@ -243,6 +271,8 @@ sub detect_modules
 
 			# similarly, for VMWare
 			qr/^(?:vmmemctl|vmxnet)/ => [ $self->VIRT_VMWARE ],
+
+			qr/^vboxadd/ => [ $self->VIRT_VIRTUALBOX ],
 		]
 	);
 }

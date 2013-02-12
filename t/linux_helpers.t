@@ -16,7 +16,7 @@ isa_ok( $d, 'Sys::Detect::Virtualization::linux');
 
 is_deeply(
 	[ sort $d->get_detectors() ],
-	[ sort qw( detect_dmesg detect_ide_devices detect_paths detect_scsi_devices detect_modules detect_mtab detect_dmidecode) ],
+	[ sort qw( detect_dmesg detect_ide_devices detect_paths detect_scsi_devices detect_modules detect_mtab detect_dmidecode detect_init_envvars) ],
 	'Got expected detectors on Linux');
 
 # Some tests return multiple hits for the same virt engine
