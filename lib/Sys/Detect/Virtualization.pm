@@ -10,11 +10,11 @@ Sys::Detect::Virtualization - Detect if a UNIX system is running as a virtual ma
 
 =head1 VERSION
 
-Version 0.106
+Version 0.107
 
 =cut
 
-our $VERSION = '0.106';
+our $VERSION = '0.107';
 
 use constant {
 	VIRT_KVM       => 'Linux KVM',
@@ -155,8 +155,8 @@ sub detect
 	}
 
 	return
-		sort { $guesses->{$b} <=> $guesses->{$a}
-			|| $_priorities{$b} <=> $_priorities{$a}
+		sort { ($guesses->{$b} <=> $guesses->{$a}) ||
+		       (($_priorities{$b} || 1.0)  <=> ($_priorities{$a} || 1.0))
 		} keys %$guesses;
 }
 

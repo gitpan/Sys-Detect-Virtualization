@@ -135,7 +135,7 @@ sub detect_dmidecode
 	# System Information
 	#         Manufacturer: Microsoft Corporation
 	#         Product Name: Virtual Machine
-	my $product = $decoder->keyword('system-product-name');
+	my $product = $decoder->keyword('system-product-name') || '';
 	if( $mfgr && $product && $mfgr =~ /microsoft/i
 	    && $product =~ /virtual machine/i ) {
 		return [ $self->VIRT_VIRTUALPC ];
@@ -246,10 +246,11 @@ sub detect_paths
 {
 	my ($self) = @_;
 	return $self->_check_path_exists([
-		'/dev/vzfs'  => [ $self->VIRT_OPENVZ ],
+		'/dev/vzfs' =>  [ $self->VIRT_OPENVZ ],
 		'/dev/vzctl' => [ $self->VIRT_OPENVZ_HOST ],
-		'/proc/vz'   => [ $self->VIRT_OPENVZ ],
-		'/proc/sys/xen/independent_wallclock' => [ $self->VIRT_XEN ],
+		'/proc/vz' =>   [ $self->VIRT_OPENVZ ],
+		'/proc/xen' =>  [ $self->VIRT_XEN ],
+		'/proc/sys/xen/independent_wallclock'  => [ $self->VIRT_XEN ],
 	]);
 }
 
